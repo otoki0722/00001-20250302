@@ -22,7 +22,8 @@ jobs:
 
       - name: Build Executable
         run: |
-          pyinstaller --onefile --name=InstagramExtractor SearchPostInfo/main.py
+          pyinstaller --onefile --noconsole --name=AccountExtractor SearchPostInfo/main.py
+
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
