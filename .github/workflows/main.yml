@@ -9,6 +9,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Show Files (Debugging)
+        run: ls -la SearchPostInfo  # main.py があるか確認
+
       - name: Install Python
         uses: actions/setup-python@v4
         with:
@@ -18,7 +21,8 @@ jobs:
         run: pip install pyinstaller
 
       - name: Build Executable
-        run: pyinstaller --onefile --name=InstagramExtractor main.py
+        run: |
+          pyinstaller --onefile --name=InstagramExtractor SearchPostInfo/main.py
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
