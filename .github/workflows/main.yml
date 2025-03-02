@@ -1,0 +1,29 @@
+name: Build macOS Executable
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: |
+          pip install pyinstaller
+
+      - name: Build Executable
+        run: |
+          pyinstaller --onefile --name=InstagramExtractor main.py
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: InstagramExtractor-mac
+          path: dist/InstagramExtractor
