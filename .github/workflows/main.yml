@@ -22,7 +22,7 @@ jobs:
 
       - name: Build macOS App
         run: |
-          pyinstaller --onefile --noconsole --name=InstagramExtractor --paths=SearchPostInfo SearchPostInfo/main.py
+          pyinstaller --onefile --noconsole --target-arch arm64 --osx-bundle-identifier=com.yourcompany.InstagramExtractor --name=InstagramExtractor SearchPostInfo/main.py
 
       - name: Show Files (After Build)
         run: ls -la dist/  # `InstagramExtractor.app` が作成されたか確認
