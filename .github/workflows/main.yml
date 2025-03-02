@@ -22,10 +22,25 @@ jobs:
 
       - name: Build macOS App
         run: |
-          pyinstaller --onefile --windowed --noconsole --osx-bundle-identifier=com.yourcompany.InstagramExtractor --name=InstagramExtractor SearchPostInfo/main.py
+          pyinstaller --onefile --windowed --noconsole \
+            --osx-bundle-identifier=com.yourcompany.InstagramExtractor \
+            --name=InstagramExtractor SearchPostInfo/main.py
 
       - name: Show Files (After Build)
-        run: ls -la dist/  # `dist/` フォルダの中身を表示
+        run: ls -la dist/  # `dist/` フォルダの中身を確認
+
+      - name: Rename macOS App
+        run: |
+          if [ -d "dist/InstagramExtractor.app" ]; then
+            echo "App is correctly named."
+          else
+            echo "Renaming the .app file..."
+            mv dist/*.app dist/InstagramExtractor.app
+          fi
+        continue-on-error: true
+
+      - name: Show Files (After Rename)
+        run: ls -la dist/  # `dist/` フォルダの中身を再確認
 
       - name: Upload macOS App
         uses: actions/upload-artifact@v4
