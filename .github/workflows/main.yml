@@ -20,15 +20,15 @@ jobs:
       - name: Install Dependencies
         run: pip install pyinstaller
 
-      - name: Build macOS Executable
+      - name: Build macOS App
         run: |
-          pyinstaller --onefile --windowed --name=InstagramExtractor SearchPostInfo/main.py
+          pyinstaller --onefile --noconsole --name=InstagramExtractor --paths=SearchPostInfo SearchPostInfo/main.py
 
       - name: Show Files (After Build)
-        run: ls -la dist/  # `InstagramExtractor` が作成されたか確認
+        run: ls -la dist/  # `InstagramExtractor.app` が作成されたか確認
 
       - name: Upload macOS App
         uses: actions/upload-artifact@v4
         with:
           name: InstagramExtractor-mac
-          path: dist/InstagramExtractor
+          path: dist/InstagramExtractor.app
